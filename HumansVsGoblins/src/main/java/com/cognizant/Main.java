@@ -2,7 +2,6 @@ package com.cognizant;
 
 import java.util.*;
 
-import static com.cognizant.Playground.rollDice;
 import static java.util.Arrays.asList;
 
 public class Main {
@@ -35,7 +34,7 @@ public class Main {
     return difficulty.equals("E")? 2 : difficulty.equals("M")? 5 : 9;
   }//getGoblinsByDifficulty()
   public static int getHumansByDifficulty(String difficulty) {
-    return difficulty.equals("E")? 0 : difficulty.equals("M")? 4 : 6;
+    return difficulty.equals("E")? 3 : difficulty.equals("M")? 4 : 6;
   }//getHumansByDifficulty()
   public static int getSizeByDifficulty(String difficulty) {
     return difficulty.equals("E")? 5 : difficulty.equals("M")? 8 : 10;
@@ -118,7 +117,7 @@ public class Main {
     System.out.println();
   }//printMoveMenu()
   public static void printStartScreen() {
-    System.out.println("\n\n-------------\uD83E\uDDDF\u200D♂\uFE0F GOBLINS \uD83E\uDDDF\u200D♂\uFE0F-------------\n\n");
+    System.out.println("\n\n------------- \uD83E\uDDDD\u200D♂\uFE0F HUMANS vs GOBLINS \uD83E\uDDDF\u200D♂\uFE0F -------------\n\n");
   }//printStartScreen()
   public static void printRollOutcomeScreen(Character attacker, int outcome) {
     System.out.println("\n\n \uD83C\uDFB2  " + attacker.toString(true) + " " + getCombatantName(attacker) + "'s attack roll is: " + outcome);
@@ -126,6 +125,9 @@ public class Main {
   public static void printTurnMessage(String army) {
     System.out.println(("*** It's the " + army + "' turn! ***\n").toUpperCase());
   }//printTurnMessage()
+  public static int rollDice() {
+    return new Random().nextInt(6) + new Random().nextInt(6) + 2;
+  }//roll()
   public static Land setGame(int size, int humans, int goblins) {
     Land land = new Land(size);
     int totalCharacters = humans + goblins;
