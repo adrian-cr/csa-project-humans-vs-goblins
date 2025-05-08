@@ -1,12 +1,11 @@
 package com.cognizant;
 
-import java.util.Random;
+import java.util.List;
 
 public abstract class Character {
-  static int count;
+  static int count = 1;
   final int id;
   int health;
-  boolean dead = false;
   int x;
   int y;
   boolean inCombat = false;
@@ -16,72 +15,64 @@ public abstract class Character {
     this.y = y;
     this.id = count;
     count++;
-  }
+  }//Character() - constructor
   
-  /* Getters & Setters */
-  
+  /* Getters: */
   public int getId() {
     return id;
-  }// No setters for ids
-  
+  }//getId() - no setters for ids
   public int getHealth() {
     return health;
-  }
-  public void setHealth(int change) {
-    if (change>=health) {
-      dead=true;
-      return;
-    }
-    health = change;
-  }
-  
+  }//getHealth()
   public int getX() {
     return x;
-  }
-  public void setX(int x) {
-    this.x = x;
-  }
-  
+  }//getX()
   public int getY() {
     return y;
-  }
-  public void setY(int y) {
-    this.y = y;
-  }
-  
+  }//getY()
   public boolean isInCombat() {
     return inCombat;
-  }
-  public void setInCombat(boolean inCombat) {
+  }//isInCombat()
+  
+  /* Setters: */
+  public void setHealth(int health) {
+    if (health<0) {
+      this.health=0;
+      return;
+    }//if - checks if health is critical
+    if (isAlive()) this.health = health;
+  }//setHealth()
+  public void setInCombat(boolean inCombat, List<List<Character>> battleList) {//Battle list required to set true->false
+    if (inCombat) {
+      this.inCombat = inCombat;
+      return;
+    }//if - checks if param value is true
+    for (List<Character> battle : battleList) //checks if character is in any pending battles
+      if (battle.get(0).getId()==id || battle.get(1).getId()==id) return;
     this.inCombat = inCombat;
-  }
+  }//setInCombat()
+  public void setX(int x) {
+    this.x = x;
+  }//setX()
+  public void setY(int y) {
+    this.y = y;
+  }//setY()
   
   /* Class Methods */
   public void attack(Character enemy, int harm) {
     enemy.setHealth(enemy.getHealth() - harm);
   }//attack()
-  
-  public void move(int x, int y) {
-    setX(x);
-    setY(y);
-  }//move()
-  
-  public void die() {
-  
-  }
-  
   public boolean isAlive() {
     return this.health > 0;
   }//isAlive()
-  
-  @Override
-  public String toString() {
-    return "Character{" +
-            "id=" + id +
-            ", health=" + health +
-            ", x=" + x +
-            ", y=" + y +
-            ", inCombat=" + inCombat +
-            '}';
-  }
-}
+  public void move(int x, int y) {
+    if (isAlive()) {
+      setX(x);
+      setY(y);
+    }//if - checks if character is still alive
+  }//move()
+  public String toString(boolean ignoreStatus) {
+    return ignoreStatus? this instanceof Human? ((Human) this).getEmoji() : "\uD83E\uDDDF\u200D♂\uFE0F" : null;
+  }//toString()
+
+}//Character

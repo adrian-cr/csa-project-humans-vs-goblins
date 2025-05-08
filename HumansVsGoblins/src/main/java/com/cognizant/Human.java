@@ -9,19 +9,25 @@ public class Human extends Character {
     super(15, x, y);
     this.name = name;
     this.emoji = emoji;
-  }
+  }//Human() - constructor
   
-  /* Getters and Setters: */
+  /* Getters: */
+  public String getEmoji() {
+    return emoji;
+  }//getEmoji()
   public String getName() {
     return name;
-  }
-  
+  }//getName()
+
+  /* Setters: */
   public void setEmoji(String emoji) {
     this.emoji = emoji;
-  }
+  }//setEmoji()
   
+  /* Class methods: */
   @Override
   public String toString() {
-    return isAlive()? emoji : "☠\uFE0F";
-  }
-}
+    return isInCombat()? "\uD83D\uDCA5" : emoji;
+  }//toString()
+  
+}//Human
