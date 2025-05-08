@@ -31,10 +31,10 @@ public class Main {
     return coords.subList(0, sample);
   }//getRandCoords()
   public static int getGoblinsByDifficulty(String difficulty) {
-    return difficulty.equals("E")? 2 : difficulty.equals("M")? 5 : 9;
+    return difficulty.equals("E")? 2 : difficulty.equals("M")? 5 : 8;
   }//getGoblinsByDifficulty()
   public static int getHumansByDifficulty(String difficulty) {
-    return difficulty.equals("E")? 3 : difficulty.equals("M")? 4 : 6;
+    return difficulty.equals("E")? 3 : difficulty.equals("M")? 4 : 5;
   }//getHumansByDifficulty()
   public static int getSizeByDifficulty(String difficulty) {
     return difficulty.equals("E")? 5 : difficulty.equals("M")? 8 : 10;
